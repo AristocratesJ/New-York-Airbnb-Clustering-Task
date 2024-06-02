@@ -1,0 +1,22 @@
+1. W iframe_figures macie 2 wizualizacje dla 12 klastrów, a nie macie dla 29. Wydaje mi się, że te 2 z 12 klastrami to jest to samo, zapisało Wam się coś źle. Zamieńcie jeden na 29 klastrów
+2. Skąd te wyższe liczby klastrów? 78 i 90 np, jakiej wyjaśnienie dlaczego akurat tyle?
+3. Nie mogę nigdzie znaleźć waszego pomysłu biznesowego? Był gdzieś na poprzednich etapach zapisywany?
+4. Poniższy kawałek kodu w ogóle mi się nie chce odpalić
+    scores = []
+   for k in range(2, 101):
+       model_instance = KMeans(n_clusters=k, random_state = seed)
+       labels = model_instance.fit_predict(df_final.drop(['minimum_nights', 'last_review', 'reviews_per_month', 'calculated_host_listings_count', 'availability_365', 'license', 'baths'], axis = 1))
+       wcss = silhouette_score(df_final.drop(['minimum_nights', 'last_review', 'reviews_per_month', 'calculated_host_listings_count', 'availability_365', 'license', 'baths'], axis = 1), labels)
+       scores.append(wcss)
+   plt.plot(range(2, 101), scores, 'x-', color = "brown")
+   plt.xlabel('k')
+   plt.ylabel('Silhouette score')
+   plt.grid()
+   plt.show()
+   # Ale nie jest juz tak wg tej metryki
+ 5. Tutaj literówka: ,,smaples" (drobne spostrzeżenie, ale w raporcie może źle wyglądać, a pojawia się w kilku miejscach:))
+     print(f"Silhouette score dla eps=0.4 i min_smaples=8: {score_4}")
+     print(f"Silhouette score dla eps=0.8 i min_smaples=3: {score_8}")
+ 6. Czemu akurat eps=0.1 przy mapce ,,istnotne kolumny"?(po strojeniu parametrów)
+ 7. Przy komentarzu ,,Ponownie 3 wypada wyjątkowo dobrze. 17 i 19 również są dobre. 27 się nei wyróznia, ale za to 34 już tak" chyba chodziło o 17 i 20: 19 ma wysoki score, a szukamy niskich wyników (w David Bouldin score przy GMM)
+ 8. Cały czas powatrzacie, że ileś tam (3,17,19) klastrów to za mało - myślę, że przydałoby się jakieś wyjaśnienie, dlaczego.
